@@ -16,3 +16,10 @@ gen/
 local.properties
 
 .DS_Store
+/.gradle
+/.idea
+/build
+/smartExtensionAPI/build
+/smartExtensionUtils/build
+/buildWatch/build
+/gradle
