@@ -193,6 +193,9 @@ public class BuildWatchExtensionService extends ExtensionService {
 				.setContentTitle(getString(R.string.new_message_from_jenkins))
 				.setWhen(System.currentTimeMillis())
 				.setAutoCancel(true)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
 				.addAction(
 						R.drawable.jenkins_30x30,
 						getString(R.string.open_in_jenkins),
