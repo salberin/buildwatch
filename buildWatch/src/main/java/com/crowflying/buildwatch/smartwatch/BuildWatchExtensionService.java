@@ -15,7 +15,6 @@
  */
 package com.crowflying.buildwatch.smartwatch;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -25,6 +24,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.crowflying.buildwatch.ConfigurationActivity;
@@ -122,7 +122,7 @@ public class BuildWatchExtensionService extends ExtensionService {
 
 	/**
 	 * Sends the notification to the watch.
-	 * 
+	 *
 	 * @param message
 	 * @param fullname
 	 * @param url
@@ -168,7 +168,7 @@ public class BuildWatchExtensionService extends ExtensionService {
 	/**
 	 * Shows a build notification as a native android notifcation on the device
 	 * for people without or with an unconnected SmartWatch..
-	 * 
+	 *
 	 * @param message
 	 * @param fullname
 	 * @param url
@@ -176,7 +176,8 @@ public class BuildWatchExtensionService extends ExtensionService {
 	 */
 	private void notifyDevice(String message, String fullname, String url,
 			boolean iBrokeTheBuild) {
-		NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationManagerCompat notificationManager =
+                NotificationManagerCompat.from(this);
 
 		Intent openInJenkins = new Intent(Intent.ACTION_VIEW);
 		if (url != null) {
