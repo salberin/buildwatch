@@ -31,55 +31,55 @@ import com.google.analytics.tracking.android.TrackedActivity;
 
 public class MainActivity extends TrackedActivity {
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		String message = getIntent().getStringExtra(
-				getString(R.string.extra_message));
+        String message = getIntent().getStringExtra(
+                getString(R.string.extra_message));
 
-		if (!isConfigured() || TextUtils.isEmpty(message)) {
-			startActivity(new Intent(this, ConfigurationActivity.class));
-			finish();
-			return;
-		}
-		NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-		manager.cancelAll();
-		setContentView(R.layout.activity_main);
-		((TextView) findViewById(R.id.message)).setText(message);
-	}
+        if (!isConfigured() || TextUtils.isEmpty(message)) {
+            startActivity(new Intent(this, ConfigurationActivity.class));
+            finish();
+            return;
+        }
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.cancelAll();
+        setContentView(R.layout.activity_main);
+        ((TextView) findViewById(R.id.message)).setText(message);
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
 
-	@Override
-	public boolean onMenuItemSelected(int featureId, MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_settings:
-			startActivity(new Intent(this, ConfigurationActivity.class));
-			return true;
-		default:
-			return super.onMenuItemSelected(featureId, item);
-		}
+    @Override
+    public boolean onMenuItemSelected(int featureId, MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                startActivity(new Intent(this, ConfigurationActivity.class));
+                return true;
+            default:
+                return super.onMenuItemSelected(featureId, item);
+        }
 
-	}
+    }
 
-	/**
-	 * Checks if the App is already configured
-	 * 
-	 * @return {@code true}, if the app is sufficiently configured,
-	 *         {@code false} otherwise.
-	 */
-	private boolean isConfigured() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(this);
-		// Currently we just check for the GCM token, because you need sender id
-		// for that and we just hope that this is done via the QR code.
-		return !TextUtils.isEmpty(prefs.getString(
-				ConfigurationActivity.PREFS_KEY_GCM_TOKEN, null));
-	}
+    /**
+     * Checks if the App is already configured
+     *
+     * @return {@code true}, if the app is sufficiently configured,
+     * {@code false} otherwise.
+     */
+    private boolean isConfigured() {
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        // Currently we just check for the GCM token, because you need sender id
+        // for that and we just hope that this is done via the QR code.
+        return !TextUtils.isEmpty(prefs.getString(
+                ConfigurationActivity.PREFS_KEY_GCM_TOKEN, null));
+    }
 
 }
